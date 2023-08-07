@@ -1,5 +1,3 @@
-// tab for all projects the user has created
-
 // project module
 // responsibilty - view and navigate to any project 
 // not responsible for displaying projects
@@ -10,7 +8,7 @@
 let project = (title) => {
     this.todos = [];
     
-    let add = (title) => todos.add(todo(title));
+    let add = (title, description) => todos.add(todo(title, description));
     let remove = (idx) => todos.splice(idx, 1);
 
     return {title, add, remove}
@@ -31,3 +29,5 @@ let todo = (title, description) => {
     let editPriority = (newPriority) => priority = newPriority;
     return { editTitle, editDiscription, editDue, editPriority }
 }
+
+export { project }

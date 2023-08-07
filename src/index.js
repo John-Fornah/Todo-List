@@ -41,15 +41,49 @@
  */
 
 // inital view | veiw all projects
-import { project, todo } from "./projects";
+import { project } from "./projects";
 
 let content = document.querySelector("#content");
 
 // Ui stuff
-let projectContainer = document.createElement("dov");
+let projectContainer = document.createElement("div");
+let addProjectBtn = document.createElement("button");
+
+// onclick function for our project 
+let addProject = () => {
+    let title = prompt("Enter a title for your new project");
+    projectContainer.append(project(title));
+}
+
+addProjectBtn.textContent = "Create New Project";
+addProjectBtn.addEventListener("click", addProject);
+projectContainer.append(addProjectBtn);
+
 let todoContainer = document.createElement("div");
+let addTodoBtn = document.createElement("button");
+addTodoBtn.textContent = "Add New Todo";
+
+// onclick for to add todo to project
+let addTodo = () => {
+    // prompt user for input, use input to create new project
+    let title = prompt("Please enter a title for the todo.");
+    let desciptions = prompt("Please add a description for the todo.");
+
+    // how do i know which project object to referance: current problem
+    project.add()
+}
+
+todoContainer.append(addTodoBtn);
+
 content.append(projectContainer);
 content.append(todoContainer);
 
 
+
+
+// function to display our list of projects
+
+// funcion to display todos tied to a project
+
+// logic to switch for one project to another is mostly Ui 
 
