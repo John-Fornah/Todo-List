@@ -23,7 +23,7 @@
  *  - create new todo (logic)
  *  - setting todo as complete (logic)
  *  - changing todo priority (logic)
- *  - tab logic (logic? dom)
+ *  - tab logic (dom)
  *      
  *  - UI Requirments:
  *      - view all projects (Ui)
@@ -44,6 +44,11 @@
 import { project } from "./projects";
 
 let content = document.querySelector("#content");
+// container for project objects
+// new a physical location to store project object
+// then we display those items on the dom
+// dom is not a container for js objects duh
+let projectList = []; 
 
 // Ui stuff
 let projectContainer = document.createElement("div");
@@ -52,7 +57,7 @@ let addProjectBtn = document.createElement("button");
 // onclick function for our project 
 let addProject = () => {
     let title = prompt("Enter a title for your new project");
-    projectContainer.append(project(title));
+    projectList.push(project(title));
 }
 
 addProjectBtn.textContent = "Create New Project";
@@ -64,26 +69,30 @@ let addTodoBtn = document.createElement("button");
 addTodoBtn.textContent = "Add New Todo";
 
 // onclick for to add todo to project
-let addTodo = () => {
+// should this be an arrow function?
+let addTodo = function() {
     // prompt user for input, use input to create new project
     let title = prompt("Please enter a title for the todo.");
     let desciptions = prompt("Please add a description for the todo.");
 
     // how do i know which project object to referance: current problem
-    project.add()
+    // need to add the index on the the todo container
+    this.parentnode.add(title, desciptions);
 }
 
+
+addTodoBtn.addEventListener("click", addTodo);
 todoContainer.append(addTodoBtn);
 
 content.append(projectContainer);
 content.append(todoContainer);
 
 
-
+// currently working on displaying projects and todos on dom
 
 // function to display our list of projects
 
 // funcion to display todos tied to a project
 
-// logic to switch for one project to another is mostly Ui 
+// logic to switch for one project to another 
 
