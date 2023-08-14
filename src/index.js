@@ -41,14 +41,19 @@
  */
 
 // inital view | veiw all projects
-import { project } from "./projects";
+import project from "./project.js";
 
-let content = document.querySelector("#content");
+// html plugin creates a new index.html file 
+// needed to create this container
+let content = document.createElement("div");
+content.id = "content";
+document.body.append(content);
+
 // container for project objects
 // new a physical location to store project object
 // then we display those items on the dom
 // dom is not a container for js objects duh
-let projectList = []; 
+const projectList = []; 
 
 // Ui stuff
 let projectContainer = document.createElement("div");
@@ -56,8 +61,12 @@ let addProjectBtn = document.createElement("button");
 
 // onclick function for our project 
 let addProject = () => {
+    // some issue with project. i dont think its defined
+    // issue still presis, could be a webpack issue idk
     let title = prompt("Enter a title for your new project");
-    projectList.push(project(title));
+    let newProject = project(title);
+    
+    projectList.push(newProject);
 }
 
 addProjectBtn.textContent = "Create New Project";
@@ -89,8 +98,23 @@ content.append(todoContainer);
 
 
 // currently working on displaying projects and todos on dom
-
 // function to display our list of projects
+
+let displayProjects = () => {
+    for (let i = 0; i < projectList.length; i++)
+    {
+        let projectItem = document.createElement("div");
+        let title = document.createElement("h2");
+
+        title.textContent = projectList[i].title;
+        projectItem.setAttribute("data-index", i);
+
+        projectItem.appendChild(title);
+        projectContainer.appendChild(projectItem);
+    }
+}
+
+displayProjects();
 
 // funcion to display todos tied to a project
 
