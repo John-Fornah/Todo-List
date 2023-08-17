@@ -41,7 +41,7 @@
  */
 
 // inital view | veiw all projects
-import project from "./project.js";
+import project  from "./project";
 
 // html plugin creates a new index.html file 
 // needed to create this container

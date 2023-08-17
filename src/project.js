@@ -5,7 +5,10 @@
 
 // project factory function 
 // responsibility - todo container
-const project = title => {
+
+// problem -> strict mode converts "this" into undefined
+// Solution -> convert to a constructor or class and move on
+export default project = title => {
     this.todos = [];
     
     const add = (title, description) => todos.add(todo(title, description));
@@ -27,7 +30,6 @@ const project = title => {
         return { editTitle, editDiscription, editDue, editPriority }
     };
 
-    return {title, add, remove};
+    return { title, add, remove };
 };
 
-export default project;

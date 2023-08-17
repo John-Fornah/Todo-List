@@ -1,0 +1,1 @@
+(()=>{"use strict";project=i=>{undefined.todos=[];return{title:i,add:(i,t)=>todos.add(((i,t)=>((void 0).title=i,(void 0).description=t,(void 0).dueDate,(void 0).priority,{editTitle:t=>i=t,editDiscription:i=>t=i,editDue:i=>dueDate=i,editPriority:i=>priority=i}))(i,t)),remove:i=>todos.splice(i,1)}}})();
