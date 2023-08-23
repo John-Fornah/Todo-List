@@ -8,28 +8,37 @@
 
 // problem -> strict mode converts "this" into undefined
 // Solution -> convert to a constructor or class and move on
-export default project = title => {
-    this.todos = [];
-    
-    const add = (title, description) => todos.add(todo(title, description));
-    const remove = idx => todos.splice(idx, 1);
+export class Project {
+    todos = [];
+    constructor (title) {
+        this.title = title;
+    }
+    add (title, description) {
+        todos.add(new todo(title, description));
+    } 
+    remove(idx){
+        todos.splice(idx, 1);
+    }
+}
 
-    // todo factory function
-    // responsibily - contain info about a individual task
-    const todo = (title, description) => {
+export class Todo {
+    dueDate;
+    priority = 1; // low = 0 , high = 1
+    constructor(title, description) {
         this.title = title;
         this.description = description;
-        this.dueDate;
-        this.priority;
+    }
 
-        // edit title, discription, dueDate, priorty 
-        const editTitle = (newTitle) => title = newTitle;
-        const editDiscription = (newDis) => description = newDis;
-        const editDue = (newDate) => dueDate = newDate;
-        const editPriority = (newPriority) => priority = newPriority;
-        return { editTitle, editDiscription, editDue, editPriority }
-    };
-
-    return { title, add, remove };
-};
-
+    setTitle (newTitle) { 
+        title = newTitle; 
+    }
+    setDiscription (newDis){ 
+        description = newDis;
+    }
+    setDueDate (newDate) { 
+        dueDate = newDate;
+    }
+    setPriority (newPriority) {
+        priority = newPriority;
+    } 
+}

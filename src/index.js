@@ -41,7 +41,7 @@
  */
 
 // inital view | veiw all projects
-import project  from "./project";
+import {Project, Todo} from "./project";
 
 // html plugin creates a new index.html file 
 // needed to create this container
@@ -64,9 +64,10 @@ let addProject = () => {
     // some issue with project. i dont think its defined
     // issue still presis, could be a webpack issue idk
     let title = prompt("Enter a title for your new project");
-    let newProject = project(title);
+    let newProject = new Project(title);
     
     projectList.push(newProject);
+    console.log (projectList[0]);
 }
 
 addProjectBtn.textContent = "Create New Project";
