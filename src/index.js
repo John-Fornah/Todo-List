@@ -67,7 +67,7 @@ let addProject = () => {
     let newProject = new Project(title);
     
     projectList.push(newProject);
-    console.log (projectList[0]);
+    displayProjects();
 }
 
 addProjectBtn.textContent = "Create New Project";
@@ -97,13 +97,25 @@ todoContainer.append(addTodoBtn);
 content.append(projectContainer);
 content.append(todoContainer);
 
+let clearProjectContainer = () => {
+    while (projectContainer.firstChild !== addProjectBtn) {
+        projectContainer.removeChild(projectContainer.firstChild)
+    } 
+}
+
 
 // currently working on displaying projects and todos on dom
 // function to display our list of projects
-
 let displayProjects = () => {
+    clearProjectContainer();
+
+    console.log(projectContainer);
+    console.log(projectList.length)
+
+
     for (let i = 0; i < projectList.length; i++)
     {
+
         let projectItem = document.createElement("div");
         let title = document.createElement("h2");
 
@@ -116,8 +128,6 @@ let displayProjects = () => {
 }
 
 displayProjects();
-
-// funcion to display todos tied to a project
 
 // logic to switch for one project to another 
 
