@@ -61,8 +61,6 @@ let addProjectBtn = document.createElement("button");
 
 // onclick function for our project 
 let addProject = () => {
-    // some issue with project. i dont think its defined
-    // issue still presis, could be a webpack issue idk
     let title = prompt("Enter a title for your new project");
     let newProject = new Project(title);
     
@@ -77,19 +75,24 @@ projectContainer.append(addProjectBtn);
 let todoContainer = document.createElement("div");
 let addTodoBtn = document.createElement("button");
 addTodoBtn.textContent = "Add New Todo";
+todoContainer.dataset.index = 0;
 
 // onclick for to add todo to project
-// should this be an arrow function?
 let addTodo = function() {
     // prompt user for input, use input to create new project
     let title = prompt("Please enter a title for the todo.");
-    let desciptions = prompt("Please add a description for the todo.");
+    let desciption = prompt("Please add a description for the todo.");
 
     // how do i know which project object to referance: current problem
-    // need to add the index on the the todo container
-    this.parentnode.add(title, desciptions);
-}
+    // pull index from todo container
+    // another function will need to be responsilbe for updating index of T container
 
+    let projectIndex = parseInt(todoContainer.dataset.index);
+
+    // current problem: error adding todo to todos array
+    projectList[projectIndex].todos.push(new Todo(title, desciption));
+    displayTodos();
+}
 
 addTodoBtn.addEventListener("click", addTodo);
 todoContainer.append(addTodoBtn);
@@ -97,37 +100,59 @@ todoContainer.append(addTodoBtn);
 content.append(projectContainer);
 content.append(todoContainer);
 
-let clearProjectContainer = () => {
-    while (projectContainer.firstChild !== addProjectBtn) {
-        projectContainer.removeChild(projectContainer.firstChild)
+let clearTodoContainer = () => {
+    while (todoContainer.lastChild !== addTodoBtn) {
+        todoContainer.removeChild(todoContainer.lastChild)
     } 
 }
 
 
-// currently working on displaying projects and todos on dom
+// display todos of current project
+let displayTodos = () => {
+    clearTodoContainer();
+
+    let currProject = projectList[parseInt(todoContainer.dataset.index)];
+
+    for (let i = 0; i < currProject.todos.length; i++)
+    {
+        let todoItem = document.createElement("Div");
+        let title = document.createElement("h2");
+        title.textContent = currProject.todos[i].getTitle();
+
+        let description = document.createElement("p");
+        description.textContent = currProject.todos[i].getDescription();
+        
+        todoItem.appendChild(title);
+        todoItem.appendChild(description);
+
+        todoContainer.appendChild(todoItem);
+    }
+}
+
+
+let clearProjectContainer = () => {
+    while (projectContainer.lastChild !== addProjectBtn) {
+        projectContainer.removeChild(projectContainer.lastChild)
+    } 
+}
+
 // function to display our list of projects
 let displayProjects = () => {
     clearProjectContainer();
 
-    console.log(projectContainer);
-    console.log(projectList.length)
-
-
     for (let i = 0; i < projectList.length; i++)
     {
-
         let projectItem = document.createElement("div");
         let title = document.createElement("h2");
 
         title.textContent = projectList[i].title;
-        projectItem.setAttribute("data-index", i);
+        projectItem.dataset.index = i;
 
         projectItem.appendChild(title);
         projectContainer.appendChild(projectItem);
     }
+
+    displayTodos();
 }
 
-displayProjects();
-
 // logic to switch for one project to another 
-
